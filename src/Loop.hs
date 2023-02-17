@@ -2,7 +2,7 @@ module Loop (loop) where
 
 import Control.Monad.Trans (lift)
 import System.Console.Haskeline
-  ( InputT, MonadException, Settings, getInputLine
+  ( InputT, Settings, getInputLine
   , handleInterrupt, runInputT, withInterrupt
   )
 import System.Exit (ExitCode(ExitSuccess))
@@ -32,7 +32,7 @@ acceptInput =
               Nothing   -> acceptInput
 
 
-getInput :: (MonadException m) => InputT m (Maybe String)
+getInput :: InputT Env.Task (Maybe [Char])
 getInput =
     go "> " ""
   where
